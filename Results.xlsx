@@ -1,0 +1,6 @@
+﻿Levenshtein Distance & similarity score：
+food	,foo	,1	,0.75	,
+foo	,food	,1	,0.75	,
+good	,goodadfda	,5	,0.4444444444444444	,
+mill	,llim	,4	,0	,
+llim	,mill	,4	,0	,
