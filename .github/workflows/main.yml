@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]  # 如果你的默认分支是master，请改为master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          
+      - name: Install dependencies (optional)
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs  # 可选，如果你需要生成文档
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PAT }}
+          publish_dir: ./  # 如果你的HTML文件在根目录
+          # 如果你的HTML文件在特定目录，例如"public"或"docs"
+          # publish_dir: ./public
