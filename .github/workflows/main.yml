@@ -2,28 +2,30 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # 或 master，根据你的默认分支
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: [ main ]  # 如果你的默认分支是master，请改为master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          path: '../'  # 如果你的HTML文件在根目录
-          # 或者指定子目录如: path: './public'
-
+          python-version: '3.x'
+          
+      - name: Install dependencies (optional)
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs  # 可选，如果你需要生成文档
+          
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # 如果你的HTML文件在根目录
+          # 如果你的HTML文件在特定目录，例如"public"或"docs"
+          # publish_dir: ./public
