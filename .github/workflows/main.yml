@@ -26,6 +26,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PAT }}
-          publish_dir: ../  # 如果你的HTML文件在根目录
+          publish_dir: ../../  # 如果你的HTML文件在根目录
           # 如果你的HTML文件在特定目录，例如"public"或"docs"
           # publish_dir: ./public
