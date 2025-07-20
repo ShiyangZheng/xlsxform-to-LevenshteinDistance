@@ -1,8 +1,13 @@
-name: Deploy HTML to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]  # 根据你的主分支名称选择
+    branches: [ main ]  # 或 master，根据你的默认分支
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -13,11 +18,11 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './'  # 如果你的HTML文件在根目录
+          path: '../'  # 如果你的HTML文件在根目录
           # 或者指定子目录如: path: './public'
 
       - name: Deploy to GitHub Pages
